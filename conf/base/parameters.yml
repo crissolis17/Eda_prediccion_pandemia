@@ -1,0 +1,218 @@
+# conf/base/parameters.yml
+# PARÁMETROS DEL PROYECTO - PREPARACIÓN PANDEMIAS
+
+# =============================================================================
+# PARÁMETROS DE NEGOCIO
+# =============================================================================
+# Estos parámetros definen los objetivos del proyecto desde el punto de vista
+# del negocio. Si necesitas cambiarlos, es aquí y no en el código.
+
+business:
+  # Umbral de cobertura vacunal que consideramos "éxito"
+  # 70% es el umbral aproximado de inmunidad de rebaño según la literatura
+  target_vaccination_threshold: 70
+
+  # Número mínimo de países que debemos analizar
+  # Según tu objetivo SMART: >150 países
+  min_countries_analysis: 150
+
+  # Horizontes de predicción en días
+  # Útil para análisis de series temporales
+  prediction_horizons_days: [30, 60, 90]
+
+  # Número de clusters para arquetipos estratégicos
+  # Según tu objetivo: 5-7 arquetipos
+  n_clusters_strategy: 7
+
+  # Top N factores más importantes a identificar
+  top_n_factors: 10
+
+# =============================================================================
+# VALIDACIÓN DE DATOS
+# =============================================================================
+# Estos parámetros controlan cómo validamos la calidad de los datos
+
+validation:
+  # Rango de fechas válidas para el análisis
+  # COVID-19 empezó en 2020, y tenemos datos hasta 2024
+  date_range_start: "2020-01-01"
+  date_range_end: "2024-12-31"
+
+  # Mínimo de observaciones por país
+  # Si un país tiene menos de 30 registros, probablemente no es confiable
+  min_required_data_points: 30
+
+  # Umbral para detectar outliers (desviaciones estándar)
+  # 3 sigma es el estándar estadístico (99.7% de los datos)
+  outlier_threshold_std: 3
+
+  # Máximo porcentaje de datos faltantes permitido
+  # Si una columna tiene >30% de NaN, puede que no sea útil
+  max_missing_percentage: 0.30
+
+# =============================================================================
+# LIMPIEZA DE DATOS
+# =============================================================================
+# Define cómo manejar datos faltantes y problemas de calidad
+
+cleaning:
+  # Estrategias para valores faltantes según el tipo de variable
+  missing_strategies:
+    # Forward fill: para series temporales acumulativas
+    # Ej: Si el total de casos es 1000 un día y falta el siguiente,
+    # probablemente sigue siendo ~1000
+    numeric_forward_fill:
+      - total_vaccinations
+      - people_vaccinated
+      - total_cases
+      - total_deaths
+
+    # Interpolación: para variables que cambian gradualmente
+    # Ej: Los casos nuevos probablemente están entre el día anterior y posterior
+    numeric_interpolate:
+      - new_cases
+      - new_deaths
+      - new_cases_smoothed
+      - new_deaths_smoothed
+
+    # Mediana: para variables cross-seccionales (no temporales)
+    # Ej: El PIB per cápita de un país es relativamente estable
+    numeric_median:
+      - gdp_per_capita
+      - population_density
+      - hospital_beds_per_thousand
+      - human_development_index
+
+    # Moda: para variables categóricas
+    categorical_mode:
+      - continent
+
+  # Columnas que NO pueden tener valores faltantes
+  # Si faltan, eliminamos esa fila
+  critical_columns:
+    - country
+    - date
+    - population
+
+  # Cómo manejar outliers
+  outlier_treatment:
+    # Método: percentile (percentiles), zscore (puntuación z), iqr (rango intercuartil)
+    cap_method: "percentile"
+    # Capamos al percentil 1 y 99 (eliminamos el 1% más extremo de cada lado)
+    lower_percentile: 0.01
+    upper_percentile: 0.99
+
+# =============================================================================
+# FEATURE ENGINEERING
+# =============================================================================
+# Parámetros para crear nuevas variables
+
+feature_engineering:
+  # Features temporales que crearemos
+  time_features:
+    - days_since_first_case # Días desde el primer caso
+    - days_since_vaccination_start # Días desde que empezó la vacunación
+    - vaccination_acceleration # Cambio en velocidad de vacunación
+    - peak_cases_timing # Cuándo ocurrió el pico de casos
+
+  # Ventanas para promedios móviles (rolling averages)
+  # 7 días = semana, 14 días = 2 semanas, 30 días = mes
+  aggregation_windows: [7, 14, 30]
+
+  # Ratios y features derivadas importantes
+  ratios:
+    - vaccination_per_case # Vacunas por caso (eficiencia)
+    - deaths_per_case # Letalidad
+    - icu_capacity_utilization # % de capacidad UCI usada
+
+  # Método de escalado para normalizar features
+  # "standard" = (x - media) / std
+  scaling_method: "standard"
+
+  # Método de encoding para variables categóricas
+  # "onehot" crea una columna binaria por categoría
+  encoding_method: "onehot"
+
+# =============================================================================
+# TARGET ENGINEERING
+# =============================================================================
+# Cómo crear las variables objetivo para los modelos
+
+target_engineering:
+  # Target para regresión: días hasta 70% cobertura
+  regression:
+    target_column: "days_to_70_coverage"
+    # Límite máximo: más de 1 año se considera "no logrado"
+    clip_max_days: 365
+
+  # Target para clasificación: nivel de riesgo
+  classification:
+    target_column: "preparedness_level"
+    # Umbrales para clasificar (índice 0-1)
+    thresholds:
+      high_risk: 0.33 # 0-33% = Alto Riesgo
+      medium_risk:
+        0.67 # 34-66% = Riesgo Medio
+        # 67-100% = Bajo Riesgo
+    labels: ["Alto_Riesgo", "Riesgo_Medio", "Bajo_Riesgo"]
+
+  # Target para clustering: arquetipos
+  clustering:
+    n_clusters: 7
+    algorithm: "kmeans" # K-means es simple y efectivo
+    # Features más importantes para clustering
+    features_subset:
+      - vaccination_speed
+      - stringency_index
+      - healthcare_capacity
+      - economic_resources
+
+# =============================================================================
+# ANÁLISIS EXPLORATORIO DE DATOS (EDA)
+# =============================================================================
+# Configuración para visualizaciones y análisis
+
+eda:
+  # Configuración de gráficos
+  visualization:
+    figure_size: [12, 8] # Ancho x Alto en pulgadas
+    style: "seaborn-v0_8" # Estilo de matplotlib
+    color_palette: "viridis" # Paleta de colores
+
+  # Análisis de correlación
+  correlation_analysis:
+    method: "pearson" # pearson, spearman, o kendall
+    threshold: 0.7 # Correlación >0.7 es "alta"
+
+  # Análisis de distribuciones
+  distribution_analysis:
+    bins: 30 # Número de bins en histogramas
+    kde: true # Mostrar kernel density estimation
+
+  # Análisis de series temporales
+  time_series_analysis:
+    resample_frequency: "W" # Agregación semanal (W = week)
+    rolling_window: 7 # Ventana móvil de 7 días
+
+# =============================================================================
+# REPORTES
+# =============================================================================
+# Configuración para generar reportes
+
+reporting:
+  # Cuántos países analizar en detalle
+  top_countries_analyze: 20
+
+  # Generar perfiles individuales de países
+  generate_country_profiles: true
+
+  # Formatos de exportación
+  export_formats: ["html", "pdf"]
+
+  # Visualizaciones a generar
+  visualizations:
+    - vaccination_progress_map
+    - cluster_analysis_plot
+    - feature_importance_chart
+    - correlation_heatmap
+    - time_series_comparison

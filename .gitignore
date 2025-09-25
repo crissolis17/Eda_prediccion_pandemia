@@ -1,0 +1,181 @@
+# .gitignore para Proyecto de Machine Learning con Kedro
+
+# =============================================================================
+# DATOS - NUNCA subir datos reales a Git
+# =============================================================================
+# Esta es probablemente la regla MÁS IMPORTANTE
+# Los datos pueden ser gigantes (varios GB) y GitHub tiene límite de 100MB por archivo
+# Además, pueden contener información sensible
+
+data/
+!data/.gitkeep  # Mantener la estructura de carpetas vacías
+
+# Excepciones: si tienes datasets pequeños de ejemplo (< 1MB), puedes incluirlos
+# Descomenta estas líneas si necesitas incluir datos de muestra:
+# !data/01_raw/sample_*.csv
+# !data/01_raw/*.json
+
+# =============================================================================
+# CREDENCIALES Y CONFIGURACIONES LOCALES
+# =============================================================================
+# NUNCA subir contraseñas, API keys, o configuraciones personales
+
+conf/local/
+*.yml.backup
+*_credentials.yml
+.env
+.env.local
+secrets/
+
+# =============================================================================
+# PYTHON - Archivos generados automáticamente
+# =============================================================================
+# Estos archivos son generados por Python y no necesitan control de versiones
+
+# Bytecode compilado
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribución / empaquetado
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments (ambientes virtuales)
+venv/
+venv-*/
+ENV/
+env/
+.venv
+
+# =============================================================================
+# JUPYTER NOTEBOOKS
+# =============================================================================
+# Checkpoints que Jupyter crea automáticamente
+
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Notebooks con outputs (opcional)
+# Algunos prefieren limpiar los outputs antes de commitear:
+# *-checkpoint.ipynb
+
+# =============================================================================
+# IDE - Archivos de editores de código
+# =============================================================================
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Spyder
+.spyderproject
+.spyproject
+
+# =============================================================================
+# TESTING Y COVERAGE
+# =============================================================================
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# =============================================================================
+# KEDRO - Archivos específicos
+# =============================================================================
+
+# Logs de Kedro
+logs/
+*.log
+
+# Documentación compilada
+docs/build/
+site/
+
+# Kedro sessions
+.kedro.yml
+
+# =============================================================================
+# SISTEMA OPERATIVO
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# =============================================================================
+# OUTPUTS Y MODELOS
+# =============================================================================
+# Modelos entrenados pueden ser muy grandes
+
+models/
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.ckpt
+*.pth
+
+# Reportes y visualizaciones generadas
+reports/generated/
+*.html
+*.pdf
+
+# =============================================================================
+# OTROS
+# =============================================================================
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archivos de backup
+*.bak
+*.backup
+
+# Archivos comprimidos (a menos que sean releases)
+*.zip
+*.tar.gz
+*.rar

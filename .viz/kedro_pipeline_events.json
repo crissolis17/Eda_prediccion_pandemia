@@ -1,0 +1,241 @@
+[
+  {
+    "event": "before_pipeline_run",
+    "timestamp": "2025-09-25T02:13:38.548156+00:00"
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_compact_raw",
+    "node_id": "a3aa26c6",
+    "status": "Available",
+    "size": 156236704
+  },
+  {
+    "event": "after_node_run",
+    "node": "validate_covid_data",
+    "node_id": "655c7d92",
+    "duration": 0.3752371999435127,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "covid_compact_validated",
+    "node_id": "b6644edb",
+    "status": "Available",
+    "size": 28554450
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vaccination_global_raw",
+    "node_id": "0b4f071d",
+    "status": "Available",
+    "size": 66040298
+  },
+  {
+    "event": "after_node_run",
+    "node": "validate_vaccination_data",
+    "node_id": "3e79795a",
+    "duration": 0.10113400011323392,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "vaccination_global_validated",
+    "node_id": "29c7f979",
+    "status": "Available",
+    "size": 29559318
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_compact_validated",
+    "node_id": "b6644edb",
+    "status": "Available",
+    "size": 28554450
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vaccination_global_validated",
+    "node_id": "29c7f979",
+    "status": "Available",
+    "size": 29559318
+  },
+  {
+    "event": "after_node_run",
+    "node": "generate_quality_report",
+    "node_id": "4ea5826d",
+    "duration": 0.1605094000697136,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "eda_summary_stats",
+    "node_id": "be4c031d",
+    "status": "Available",
+    "size": 4673
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_compact_validated",
+    "node_id": "b6644edb",
+    "status": "Available",
+    "size": 28554450
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vaccination_global_validated",
+    "node_id": "29c7f979",
+    "status": "Available",
+    "size": 29559318
+  },
+  {
+    "event": "after_node_run",
+    "node": "select_columns",
+    "node_id": "96364ecd",
+    "duration": 0.05695270001888275,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "covid_selected",
+    "node_id": "a73beaca",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "vacc_selected",
+    "node_id": "bcae84c2",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_selected",
+    "node_id": "a73beaca",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vacc_selected",
+    "node_id": "bcae84c2",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "impute_missing",
+    "node_id": "3f5cc7b4",
+    "duration": 0.12294539995491505,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "covid_imputed",
+    "node_id": "e2a4ac6b",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "vacc_imputed",
+    "node_id": "0bdfc3f1",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_imputed",
+    "node_id": "e2a4ac6b",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vacc_imputed",
+    "node_id": "0bdfc3f1",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "create_features",
+    "node_id": "1970e1a7",
+    "duration": 0.07878099987283349,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "covid_features",
+    "node_id": "85df155f",
+    "status": "Available",
+    "size": 8805926
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "vacc_features",
+    "node_id": "125f4f00",
+    "status": "Available",
+    "size": 6316581
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "covid_features",
+    "node_id": "85df155f",
+    "status": "Available",
+    "size": 8805926
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "vacc_features",
+    "node_id": "125f4f00",
+    "status": "Available",
+    "size": 6316581
+  },
+  {
+    "event": "after_node_run",
+    "node": "integrate_datasets",
+    "node_id": "e824ea6e",
+    "duration": 0.18038349994458258,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "integrated_data",
+    "node_id": "d9a051b4",
+    "status": "Available",
+    "size": 53480
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "integrated_data",
+    "node_id": "d9a051b4",
+    "status": "Available",
+    "size": 53480
+  },
+  {
+    "event": "after_node_run",
+    "node": "create_ml_datasets",
+    "node_id": "8076f381",
+    "duration": 0.009898000163957477,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "regression_data",
+    "node_id": "26fa9891",
+    "status": "Available",
+    "size": 21679
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "classification_data",
+    "node_id": "e8a50f82",
+    "status": "Available",
+    "size": 4898
+  },
+  {
+    "event": "after_pipeline_run",
+    "timestamp": "2025-09-25T02:13:46.908546+00:00"
+  }
+]

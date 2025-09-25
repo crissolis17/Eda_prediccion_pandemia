@@ -1,0 +1,175 @@
+# conf/base/catalog.yml
+# Catálogo de Datos - Proyecto Preparación Pandemias
+
+# =============================================================================
+# DATASETS RAW (Datos Originales)
+# =============================================================================
+
+covid_compact_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/covid_compact.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_global_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_global.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_age_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_age.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_manufacturer_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_manufacturer.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+# =============================================================================
+# DATASETS INTERMEDIATE (Datos Validados)
+# =============================================================================
+
+covid_compact_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/covid_compact_validated.parquet
+
+vaccination_global_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_global_validated.parquet
+
+vaccination_age_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_age_validated.parquet
+
+vaccination_manufacturer_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_manufacturer_validated.parquet
+
+# =============================================================================
+# DATASETS PRIMARY (Datos Limpios)
+# =============================================================================
+
+covid_compact_clean:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/covid_compact_clean.parquet
+
+vaccination_metrics_clean:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/vaccination_metrics_clean.parquet
+
+pandemic_response_integrated:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/pandemic_response_integrated.parquet
+
+# =============================================================================
+# FEATURE DATA
+# =============================================================================
+
+features_regression:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_regression.parquet
+
+features_classification:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_classification.parquet
+
+features_clustering:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_clustering.parquet
+
+target_vaccination_speed:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/target_vaccination_speed.parquet
+
+target_preparedness_level:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/target_preparedness_level.parquet
+
+# =============================================================================
+# MODEL INPUT
+# =============================================================================
+
+model_input_regression:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/regression_data.parquet
+
+model_input_classification:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/classification_data.parquet
+
+model_input_clustering:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/clustering_data.parquet
+
+# =============================================================================
+# REPORTING
+# =============================================================================
+
+eda_summary_stats:
+  type: pandas.ParquetDataset
+  filepath: data/06_reporting/eda_summary_statistics.parquet
+
+country_profiles:
+  type: pandas.ParquetDataset
+  filepath: data/06_reporting/country_profiles.parquet
+
+# =============================================================================
+# DATASETS TEMPORALES (Solo en memoria)
+# =============================================================================
+
+covid_data_cleaned_temp:
+  type: MemoryDataset
+
+features_time_temp:
+  type: MemoryDataset
+
+features_all_temp:
+  type: MemoryDataset
+
+# =============================================================================
+# DATOS LIMPIOS (data_cleaning pipeline)
+# =============================================================================
+
+covid_selected:
+  type: MemoryDataset
+
+vacc_selected:
+  type: MemoryDataset
+
+covid_imputed:
+  type: MemoryDataset
+
+vacc_imputed:
+  type: MemoryDataset
+
+covid_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/covid_features.parquet
+
+vacc_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/vacc_features.parquet
+
+integrated_data:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/integrated_data.parquet
+
+regression_data:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/regression_data.parquet
+
+classification_data:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/classification_data.parquet
