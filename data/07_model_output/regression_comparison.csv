@@ -1,0 +1,8 @@
+Modelo,CV RMSE (mean±std),Train RMSE,Train MAE,Train R²,Train MAPE (%),Best Params
+Ridge Regression,29.82 ± nan,28.77,21.66,0.3246,2765357983291179008.00,{'alpha': 10.0}
+Linear Regression,29.87 ± 2.83,28.75,21.29,0.3258,2735223750413680640.00,N/A
+LightGBM,30.03 ± nan,25.76,20.21,0.4586,2593067524763471872.00,"{'learning_rate': 0.01, 'max_depth': 3, 'min_child_samples': 20, 'n_estimators': 200, 'num_leaves': 31}"
+Random Forest,30.35 ± nan,20.53,14.58,0.6561,1885522558801272832.00,"{'max_depth': 10, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 200}"
+XGBoost,30.63 ± nan,23.55,18.60,0.5476,2431810689194674176.00,"{'colsample_bytree': 1.0, 'learning_rate': 0.01, 'max_depth': 3, 'n_estimators': 200, 'subsample': 0.8}"
+Gradient Boosting,30.77 ± nan,22.96,18.22,0.5698,2433015093099934208.00,"{'learning_rate': 0.01, 'max_depth': 3, 'min_samples_split': 10, 'n_estimators': 200}"
+SVR,31.69 ± nan,30.86,23.99,0.2231,3931325748495683072.00,"{'C': 0.1, 'epsilon': 0.1, 'kernel': 'linear'}"

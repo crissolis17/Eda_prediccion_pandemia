@@ -1,0 +1,526 @@
+# conf/base/catalog.yml
+# Catálogo de Datos - Proyecto Preparación Pandemias
+# Compatible con Kedro 0.18.x (sin parámetro 'layer')
+# Actualizado: 2025-10-29
+
+# =============================================================================
+# DATASETS RAW (Datos Originales)
+# =============================================================================
+
+covid_compact_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/covid_compact.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_global_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_global.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_age_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_age.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+vaccination_manufacturer_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/vaccination_manufacturer.csv
+  load_args:
+    sep: ","
+    parse_dates: ["date"]
+    low_memory: false
+
+# =============================================================================
+# DATASETS INTERMEDIATE (Datos Validados)
+# =============================================================================
+
+covid_compact_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/covid_compact_validated.parquet
+
+vaccination_global_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_global_validated.parquet
+
+vaccination_age_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_age_validated.parquet
+
+vaccination_manufacturer_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/vaccination_manufacturer_validated.parquet
+
+# =============================================================================
+# DATASETS PRIMARY (Datos Limpios)
+# =============================================================================
+
+covid_compact_clean:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/covid_compact_clean.parquet
+
+vaccination_metrics_clean:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/vaccination_metrics_clean.parquet
+
+pandemic_response_integrated:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/pandemic_response_integrated.parquet
+
+covid_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/covid_features.parquet
+
+vacc_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/vacc_features.parquet
+
+integrated_data:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/integrated_data.parquet
+
+classification_ready_data:
+  type: pandas.CSVDataset
+  filepath: data/03_primary/classification_ready_data.csv
+
+# =============================================================================
+# FEATURE DATA (Features Engineering)
+# =============================================================================
+
+features_regression:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_regression.parquet
+
+features_classification:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_classification.parquet
+
+features_clustering:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/features_clustering.parquet
+
+target_vaccination_speed:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/target_vaccination_speed.parquet
+
+target_preparedness_level:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/target_preparedness_level.parquet
+
+regression_data:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/regression_data.parquet
+
+classification_data:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/classification_data.parquet
+
+# =============================================================================
+# MODEL INPUT (Datos listos para entrenamiento)
+# =============================================================================
+
+model_input_regression:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/regression_data.parquet
+
+model_input_classification:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/classification_data.parquet
+
+model_input_clustering:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/clustering_data.parquet
+
+# Alias para compatibilidad con pipelines
+regression_dataset:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/regression_data.parquet
+
+classification_dataset:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/classification_data.parquet
+
+# =============================================================================
+# MODELOS ENTRENADOS (Trained Models)
+# =============================================================================
+
+# --- MODELOS DE REGRESIÓN ---
+best_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/best_regression_model.pkl
+  versioned: true
+
+regression_scaler:
+  type: pickle.PickleDataset
+  filepath: data/06_models/regression_scaler.pkl
+  versioned: true
+
+linear_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/linear_regression.pkl
+  versioned: true
+
+ridge_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/ridge_regression.pkl
+  versioned: true
+
+random_forest_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/random_forest_regression.pkl
+  versioned: true
+
+gradient_boosting_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/gradient_boosting_regression.pkl
+  versioned: true
+
+xgboost_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/xgboost_regression.pkl
+  versioned: true
+
+svr_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/svr.pkl
+  versioned: true
+
+lightgbm_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/lightgbm_regression.pkl
+  versioned: true
+
+# --- MODELOS DE CLASIFICACIÓN ---
+best_classification_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/best_classification_model.pkl
+  versioned: true
+
+classification_scaler:
+  type: pickle.PickleDataset
+  filepath: data/06_models/classification_scaler.pkl
+  versioned: true
+
+logistic_regression_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/logistic_regression.pkl
+  versioned: true
+
+random_forest_classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/random_forest_classifier.pkl
+  versioned: true
+
+gradient_boosting_classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/gradient_boosting_classifier.pkl
+  versioned: true
+
+xgboost_classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/xgboost_classifier.pkl
+  versioned: true
+
+lightgbm_classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/lightgbm_classifier.pkl
+  versioned: true
+
+svc_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/svc.pkl
+  versioned: true
+
+knn_classifier_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/knn_classifier.pkl
+  versioned: true
+
+# =============================================================================
+# MODEL OUTPUT (Resultados y Métricas)
+# =============================================================================
+
+# --- OUTPUTS DE REGRESIÓN ---
+regression_comparison_table:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/regression_comparison.csv
+  save_args:
+    index: false
+
+regression_models_metrics:
+  type: pickle.PickleDataset
+  filepath: data/07_model_output/regression_models_metrics.pkl
+  versioned: true
+
+regression_predictions:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/regression_predictions.csv
+  save_args:
+    index: false
+
+regression_feature_importance:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/regression_feature_importance.csv
+  save_args:
+    index: false
+
+regression_residuals:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/regression_residuals.csv
+  save_args:
+    index: false
+
+# --- OUTPUTS DE CLASIFICACIÓN ---
+classification_comparison_table:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/classification_comparison.csv
+  save_args:
+    index: false
+
+classification_models_metrics:
+  type: pickle.PickleDataset
+  filepath: data/07_model_output/classification_models_metrics.pkl
+  versioned: true
+
+classification_predictions:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/classification_predictions.csv
+  save_args:
+    index: false
+
+classification_feature_importance:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/classification_feature_importance.csv
+  save_args:
+    index: false
+
+classification_confusion_matrix:
+  type: pickle.PickleDataset
+  filepath: data/07_model_output/classification_confusion_matrix.pkl
+  versioned: false
+
+classification_classification_report:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/classification_report.csv
+  save_args:
+    index: false
+
+# =============================================================================
+# REPORTING (Visualizaciones y Reportes)
+# =============================================================================
+
+eda_summary_stats:
+  type: pandas.ParquetDataset
+  filepath: data/08_reporting/eda_summary_statistics.parquet
+
+country_profiles:
+  type: pandas.ParquetDataset
+  filepath: data/08_reporting/country_profiles.parquet
+
+# --- VISUALIZACIONES DE REGRESIÓN ---
+regression_models_comparison_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_models_comparison.png
+
+regression_feature_importance_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_feature_importance.png
+
+regression_cv_distribution_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_cv_distribution.png
+
+regression_residuals_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_residuals.png
+
+regression_predictions_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_predictions_vs_actual.png
+
+regression_learning_curves_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/regression_learning_curves.png
+
+# --- VISUALIZACIONES DE CLASIFICACIÓN ---
+classification_models_comparison_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_models_comparison.png
+
+classification_confusion_matrix_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_confusion_matrix.png
+
+classification_roc_curves_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_roc_curves.png
+
+classification_precision_recall_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_precision_recall.png
+
+classification_feature_importance_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_feature_importance.png
+
+classification_cv_scores_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_cv_scores.png
+
+classification_learning_curves_plot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/classification_learning_curves.png
+
+# --- REPORTES CONSOLIDADOS ---
+models_final_report:
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/models_final_report.xlsx
+  save_args:
+    index: false
+
+models_comparison_dashboard:
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/models_comparison_dashboard.xlsx
+  save_args:
+    index: false
+
+# =============================================================================
+# DATASETS TEMPORALES (Solo en memoria - no se guardan en disco)
+# =============================================================================
+
+covid_data_cleaned_temp:
+  type: MemoryDataset
+
+features_time_temp:
+  type: MemoryDataset
+
+features_all_temp:
+  type: MemoryDataset
+
+covid_selected:
+  type: MemoryDataset
+
+vacc_selected:
+  type: MemoryDataset
+
+covid_imputed:
+  type: MemoryDataset
+
+vacc_imputed:
+  type: MemoryDataset
+
+# --- DATASETS TEMPORALES PARA REGRESIÓN ---
+X_train_regression:
+  type: MemoryDataset
+
+X_test_regression:
+  type: MemoryDataset
+
+y_train_regression:
+  type: MemoryDataset
+
+y_test_regression:
+  type: MemoryDataset
+
+X_scaled_regression:
+  type: MemoryDataset
+
+X_train_reg:
+  type: MemoryDataset
+
+X_test_reg:
+  type: MemoryDataset
+
+y_train_reg:
+  type: MemoryDataset
+
+y_test_reg:
+  type: MemoryDataset
+
+X_train_scaled_reg:
+  type: MemoryDataset
+
+X_test_scaled_reg:
+  type: MemoryDataset
+
+# --- DATASETS TEMPORALES PARA CLASIFICACIÓN ---
+X_train_classification:
+  type: MemoryDataset
+
+X_test_classification:
+  type: MemoryDataset
+
+y_train_classification:
+  type: MemoryDataset
+
+y_test_classification:
+  type: MemoryDataset
+
+X_scaled_classification:
+  type: MemoryDataset
+
+X_train_clf:
+  type: MemoryDataset
+
+X_test_clf:
+  type: MemoryDataset
+
+y_train_clf:
+  type: MemoryDataset
+
+y_test_clf:
+  type: MemoryDataset
+
+X_train_scaled_clf:
+  type: MemoryDataset
+
+X_test_scaled_clf:
+  type: MemoryDataset
+
+# --- DATASETS TEMPORALES GENERALES ---
+temp_model_predictions:
+  type: MemoryDataset
+
+temp_model_metrics:
+  type: MemoryDataset
+
+# =============================================================================
+# NOTAS DE CONFIGURACIÓN
+# =============================================================================
+#
+# VERSIONADO:
+#   - versioned: true -> El dataset será versionado con timestamp
+#   - Útil para modelos y métricas (trazabilidad de experimentos)
+#   - Kedro guarda versiones en formato: YYYY-MM-DDTHH.MM.SS.sssZ
+#
+# FORMATOS DE ARCHIVO:
+#   - CSV: Datos tabulares pequeños, fácil inspección
+#   - Parquet: Datos tabulares grandes, comprimido, rápido
+#   - Pickle: Objetos Python complejos (modelos, métricas)
+#   - Excel: Reportes finales para stakeholders
+#   - MatplotlibWriter: Imágenes PNG para visualizaciones
+#
+# MEMORY DATASETS:
+#   - No se guardan en disco (solo en RAM durante ejecución)
+#   - Útiles para datos intermedios
+#   - Se pierden al finalizar el pipeline
+#
+# COMPATIBILIDAD:
+#   - Kedro 0.18.x (sin parámetro 'layer')
+#   - DVC (Data Version Control) con versioned: true
+#   - Apache Airflow (paths relativos)
+#   - Docker (paths independientes del sistema)
+
+# =============================================================================
+# FIN DEL CATÁLOGO
+# Total de datasets: 100+
+# Última actualización: 2025-10-29
+# =============================================================================

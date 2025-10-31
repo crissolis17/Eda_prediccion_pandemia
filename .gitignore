@@ -1,0 +1,94 @@
+# ============================================
+# PYTHON
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# ============================================
+# ENTORNOS VIRTUALES
+# ============================================
+venv/
+venv-nuevo/
+env/
+ENV/
+.venv
+
+# ============================================
+# KEDRO
+# ============================================
+# Datos (NO subir datasets grandes)
+data/01_raw/*.csv
+data/01_raw/*.xlsx
+data/01_raw/*.parquet
+data/02_intermediate/
+data/03_primary/
+data/04_feature/
+data/05_model_input/
+data/06_models/*.pkl
+data/06_models/*.joblib
+data/07_reporting/*.csv
+data/07_reporting/*.json
+data/08_reporting/
+
+# Mantener estructura de carpetas
+!data/01_raw/.gitkeep
+!data/02_intermediate/.gitkeep
+!data/03_primary/.gitkeep
+!data/04_feature/.gitkeep
+!data/05_model_input/.gitkeep
+!data/06_models/.gitkeep
+!data/07_reporting/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Credenciales
+conf/local/
+
+# ============================================
+# JUPYTER
+# ============================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ============================================
+# AIRFLOW
+# ============================================
+airflow-docker/logs/
+airflow-docker/plugins/
+airflow-docker/*.pid
+
+# ============================================
+# DVC
+# ============================================
+.dvc/cache/
+.dvc/tmp/
+
+# ============================================
+# IDE
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================
+# SISTEMA OPERATIVO
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================
+# OTROS
+# ============================================
+.pytest_cache/
+.coverage
+htmlcov/

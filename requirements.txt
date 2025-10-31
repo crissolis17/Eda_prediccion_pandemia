@@ -1,0 +1,244 @@
+# requirements.txt
+# DEPENDENCIAS DEL PROYECTO - PREDICCIÓN PREPARACIÓN PANDEMIAS
+# Actualizado: 2025-10-29
+# Instalar con: pip install -r requirements.txt
+
+# =============================================================================
+# KEDRO - Framework principal
+# =============================================================================
+kedro>=0.18.0,<0.19.0          # Framework para ML pipelines
+kedro-viz>=6.0.0               # Visualización interactiva de pipelines
+kedro-datasets>=1.0.0          # Datasets adicionales para Kedro
+
+# =============================================================================
+# DATA MANIPULATION - Procesamiento de datos
+# =============================================================================
+pandas>=1.5.0                  # Manipulación de dataframes (LA herramienta principal)
+numpy>=1.23.0                  # Operaciones numéricas eficientes
+scipy>=1.9.0                   # Funciones científicas y estadísticas
+pyarrow>=10.0.0                # Soporte para archivos Parquet (más rápido)
+fastparquet>=2023.0.0          # Alternativa para Parquet
+
+# =============================================================================
+# VISUALIZATION - Visualización de datos
+# =============================================================================
+matplotlib>=3.6.0              # Gráficos básicos
+seaborn>=0.12.0                # Gráficos estadísticos bonitos
+plotly>=5.11.0                 # Gráficos interactivos (muy útil para dashboards)
+
+# =============================================================================
+# MACHINE LEARNING - Algoritmos y herramientas CORE
+# =============================================================================
+scikit-learn>=1.3.0            # Algoritmos de ML (Random Forest, SVM, etc.)
+xgboost>=2.0.0                 # Gradient Boosting optimizado ⭐ REQUERIDO
+lightgbm>=4.0.0                # LightGBM (más rápido que XGBoost) ⭐ REQUERIDO
+imbalanced-learn>=0.11.0       # Técnicas para datasets desbalanceados
+
+# =============================================================================
+# JUPYTER - Notebooks interactivos
+# =============================================================================
+jupyter>=1.0.0                 # Ambiente de notebooks
+ipykernel>=6.20.0              # Kernel de Python para Jupyter
+ipywidgets>=8.0.0              # Widgets interactivos en notebooks
+nbformat>=5.7.0                # Formato de notebooks
+
+# =============================================================================
+# DATA QUALITY - Calidad y validación de datos
+# =============================================================================
+# great-expectations>=0.18.0   # Validación y testing de datos (COMENTADO: opcional)
+# ydata-profiling>=4.0.0       # Reportes automáticos de EDA (antes pandas-profiling)
+
+# =============================================================================
+# UTILITIES - Utilidades
+# =============================================================================
+python-dotenv>=1.0.0           # Manejo de variables de entorno
+pyyaml>=6.0                    # Leer archivos YAML (ya incluido con Kedro)
+tqdm>=4.65.0                   # Barras de progreso bonitas
+openpyxl>=3.1.0                # Leer/escribir archivos Excel ⭐ REQUERIDO
+xlrd>=2.0.0                    # Leer archivos Excel antiguos (.xls)
+
+# =============================================================================
+# TESTING - Pruebas y calidad de código
+# =============================================================================
+pytest>=7.4.0                  # Framework de testing
+pytest-cov>=4.1.0              # Cobertura de tests
+pytest-mock>=3.11.0            # Mocks para testing
+black>=23.0.0                  # Formateo automático de código
+flake8>=6.0.0                  # Linter para encontrar errores
+pylint>=2.17.0                 # Análisis estático de código
+
+# =============================================================================
+# PARCIAL 2 - DVC (Data Version Control)
+# =============================================================================
+dvc>=3.0.0                     # Versionado de datos y modelos ⭐ PARCIAL 2
+dvc[s3]>=3.0.0                 # Soporte para almacenamiento S3 (opcional)
+# dvc[gdrive]>=3.0.0           # Soporte para Google Drive (descomentar si usas)
+# dvc[azure]>=3.0.0            # Soporte para Azure (descomentar si usas)
+
+# =============================================================================
+# PARCIAL 2 - AIRFLOW (Orquestación)
+# =============================================================================
+apache-airflow>=2.7.0          # Orquestación de pipelines ⭐ PARCIAL 2
+apache-airflow-providers-common-sql>=1.7.0  # Provider SQL
+# NOTA: Airflow tiene muchas dependencias. Si da conflictos, instalar en un venv separado
+
+# =============================================================================
+# PARCIAL 2 - DOCKER (Containerización)
+# =============================================================================
+# Docker no requiere dependencias Python, pero estas ayudan:
+docker>=6.1.0                  # Cliente Python de Docker (para scripts)
+docker-compose>=1.29.0         # Docker Compose desde Python
+
+# =============================================================================
+# MONITORING & LOGGING - Monitoreo
+# =============================================================================
+mlflow>=2.7.0                  # Tracking de experimentos (opcional pero útil)
+# wandb>=0.15.0                # Weights & Biases para tracking (alternativa a MLflow)
+
+# =============================================================================
+# PERFORMANCE - Optimización
+# =============================================================================
+joblib>=1.3.0                  # Paralelización y caché
+numba>=0.58.0                  # Compilación JIT para acelerar código Python
+
+# =============================================================================
+# COMPATIBILITY - Compatibilidad
+# =============================================================================
+typing-extensions>=4.7.0       # Type hints adicionales
+fsspec>=2023.9.0               # Sistema de archivos abstracto
+
+# =============================================================================
+# SECURITY - Seguridad
+# =============================================================================
+cryptography>=41.0.0           # Encriptación (para credenciales)
+
+# =============================================================================
+# VERSIONES CONGELADAS (Si tienes problemas de compatibilidad)
+# =============================================================================
+# Descomentar estas líneas si necesitas versiones exactas:
+#
+# kedro==0.18.14
+# pandas==1.5.3
+# scikit-learn==1.3.2
+# xgboost==2.0.3
+# lightgbm==4.1.0
+
+# =============================================================================
+# INSTALACIÓN RECOMENDADA
+# =============================================================================
+#
+# OPCIÓN 1 - Instalación completa (incluye Airflow):
+#   pip install -r requirements.txt
+#
+# OPCIÓN 2 - Instalación básica (sin Airflow, más rápido):
+#   pip install kedro pandas numpy scikit-learn xgboost lightgbm matplotlib seaborn
+#   pip install kedro-viz kedro-datasets openpyxl pyarrow
+#   pip install dvc jupyter
+#
+# OPCIÓN 3 - Instalación mínima (solo para entrenar modelos):
+#   pip install kedro pandas scikit-learn xgboost lightgbm openpyxl pyarrow
+#
+# AIRFLOW EN AMBIENTE SEPARADO (recomendado):
+#   python -m venv venv-airflow
+#   venv-airflow\Scripts\activate
+#   pip install apache-airflow==2.7.3
+#
+
+# =============================================================================
+# TROUBLESHOOTING
+# =============================================================================
+#
+# Error: "No module named 'xgboost'"
+#   → pip install xgboost
+#
+# Error: "No module named 'lightgbm'"
+#   → pip install lightgbm
+#
+# Error: "Could not find a version that satisfies the requirement apache-airflow"
+#   → Instalar Airflow en un ambiente virtual separado (ver OPCIÓN 3 arriba)
+#
+# Error: Conflictos de dependencias
+#   → pip install --upgrade pip
+#   → pip install -r requirements.txt --no-cache-dir
+#
+# Error: "Microsoft Visual C++ 14.0 is required" (Windows)
+#   → Instalar Build Tools: https://visualstudio.microsoft.com/downloads/
+#   → O usar wheels precompilados: pip install --only-binary :all: lightgbm
+#
+
+# =============================================================================
+# COMANDOS ÚTILES
+# =============================================================================
+#
+# Ver versiones instaladas:
+#   pip list
+#
+# Verificar qué paquetes están desactualizados:
+#   pip list --outdated
+#
+# Exportar versiones exactas actuales:
+#   pip freeze > requirements-frozen.txt
+#
+# Actualizar todos los paquetes:
+#   pip install --upgrade -r requirements.txt
+#
+# Verificar compatibilidad de dependencias:
+#   pip check
+#
+
+# =============================================================================
+# NOTAS IMPORTANTES
+# =============================================================================
+#
+# 1. KEDRO 0.18.x vs 0.19.x:
+#    - Usamos 0.18.x porque es más estable
+#    - 0.19.x tiene cambios breaking (parámetro 'layer' en catalog)
+#
+# 2. XGBOOST y LIGHTGBM:
+#    - Son OBLIGATORIOS para el Parcial 2
+#    - Si dan problemas en Windows, usar wheels precompilados
+#
+# 3. APACHE AIRFLOW:
+#    - Tiene >300 dependencias
+#    - Recomendado: instalar en ambiente virtual separado
+#    - Alternativa: usar Docker para Airflow
+#
+# 4. DVC:
+#    - Necesario para versionado de datos/modelos
+#    - Instalar providers según tu storage (S3, GDrive, Azure)
+#
+# 5. OPENPYXL:
+#    - Necesario para leer/escribir archivos Excel
+#    - Usado en reportes finales
+#
+
+# =============================================================================
+# ESTRUCTURA RECOMENDADA DE AMBIENTES VIRTUALES
+# =============================================================================
+#
+# venv-kedro/          → Kedro + ML models (este requirements.txt)
+# venv-airflow/        → Solo Airflow (ambiente separado)
+# venv-docker/         → Para construir imagen Docker (minimal)
+#
+
+# =============================================================================
+# VALIDACIÓN POST-INSTALACIÓN
+# =============================================================================
+#
+# Verificar instalación:
+#   python -c "import kedro; print(kedro.__version__)"
+#   python -c "import xgboost; print(xgboost.__version__)"
+#   python -c "import lightgbm; print(lightgbm.__version__)"
+#   python -c "import sklearn; print(sklearn.__version__)"
+#
+# Verificar Kedro:
+#   kedro --version
+#   kedro info
+#
+
+# =============================================================================
+# FIN DEL ARCHIVO
+# Total de paquetes principales: ~30
+# Última actualización: 2025-10-29
+# Compatible con: Python 3.8, 3.9, 3.10, 3.11
+# =============================================================================
